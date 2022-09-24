@@ -17,7 +17,6 @@ func main() {
 		array_name := [length]datatype{values} --> Panjang array di definisikan
 		array_name := [...]datatype{values} --> Panjang array bebas
 	*/
-
 	var buah = [2]string{"Anggur", "Nanas"}
 	fmt.Printf("Buah yang pertama adalah %s dan buah yang kedua adalah %s \n", buah[0], buah[1])
 
