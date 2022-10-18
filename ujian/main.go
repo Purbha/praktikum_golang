@@ -2,16 +2,9 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/purbha/latihan/latihan10/fungsi"
-	"github.com/purbha/latihan/latihan22/tampil"
 )
 
-func garis2() {
-	fmt.Println("=====================================================")
-}
-
-func garis3(panjang int) {
+func cetakGaris(panjang int) {
 	for i := 0; i < panjang; i++ {
 		fmt.Print("=")
 	}
@@ -26,27 +19,27 @@ type Pelanggan struct {
 	lama  int
 }
 
-func cetakHarga() {
-	garis2()
-	fmt.Println("Kode Kelas\t| Nama Kelas\t| Biaya Permalam")
-	garis2()
-	fmt.Println("1\t\t| VIP\t\t| 1.000.000")
-	fmt.Println("2\t\t| Reguler\t| 800.000")
-	fmt.Println("3\t\t| Ekonomi\t| 600.000")
-	garis2()
+func cetakKetentuan() {
+	cetakGaris(50)
+	fmt.Println("Kode \t| Nama Kelas\t| Biaya Permalam")
+	cetakGaris(50)
+	fmt.Println("1\t| VIP\t\t| 1.000.000")
+	fmt.Println("2\t| Reguler\t| 800.000")
+	fmt.Println("3\t| Ekonomi\t| 600.000")
+	cetakGaris(50)
 	fmt.Print("\n")
-	garis2()
-	fmt.Println("Kode Kamar\t| Nama Kamar\t")
-	garis2()
-	fmt.Println("A\t\t| Asther")
-	fmt.Println("S\t\t| Serunir")
-	fmt.Println("F\t\t| Flamboyan")
-	garis2()
+	cetakGaris(50)
+	fmt.Println("Kode\t| Nama Kamar\t")
+	cetakGaris(50)
+	fmt.Println("A\t| Asther")
+	fmt.Println("S\t| Serunir")
+	fmt.Println("F\t| Flamboyan")
+	cetakGaris(50)
 	fmt.Print("\n")
-	garis2()
+	cetakGaris(50)
 	fmt.Println("Diskon 10% jika lama sewa lebih dari 10 hari.")
 	fmt.Println("Diskon 5% jika lama sewa lebih dari 5 hari.")
-	garis2()
+	cetakGaris(50)
 	fmt.Print("\n")
 }
 
@@ -67,7 +60,7 @@ func IsiData() {
 	pel3.nama = "Budi"
 	pel3.kelas = 3
 	pel3.kamar = "S"
-	pel3.lama = 7
+	pel3.lama = 4
 }
 
 func cetakPel(data Pelanggan) {
@@ -79,18 +72,27 @@ func cetakPel(data Pelanggan) {
 	fmt.Print("\n")
 }
 
-func cetakPel2(data Pelanggan) {
+func dataPel(data Pelanggan) {
 	var kelas string = cetakKelas(data.kelas)
 	var kamar string = cetakKamar(data.kamar)
-	var harga int = nilaiHarga(data.kelas)
-	var subtotal int = harga * data.lama
-	var dis float32 = diskon(data.lama, subtotal)
-	var total int = subtotal - int(dis)
-	fmt.Print(data.no, "\t", data.nama, "\t", kelas, "\t\t", kamar, "\t", harga, "\t\t")
-	fmt.Println(data.lama, "\t", subtotal, "\t", dis, "\t", total)
+	var harga float32 = cetakHarga(data.kelas)
+	var subtotal float32 = harga * float32(data.lama)
+	var diskon float32 = hitungDiskon(data.lama, subtotal)
+	var total float32 = subtotal - diskon
+	fmt.Print("|")
+	fmt.Printf(" %v  |", data.no)
+	fmt.Printf(" %v |", data.nama)
+	fmt.Printf(" %v |", kelas)
+	fmt.Printf(" %v |", kamar)
+	fmt.Printf(" %8.0f |", harga)
+	fmt.Printf(" %4.0f |", float32(data.lama))
+	fmt.Printf(" %8.0f |", subtotal)
+	fmt.Printf(" %6.0f |", diskon)
+	fmt.Printf("    %8.0f |", total)
+	fmt.Print("\n")
 }
 
-func diskon(lama int, subtot int) (hasil float32) {
+func hitungDiskon(lama int, subtot float32) (hasil float32) {
 	if lama > 10 {
 		hasil = 0.1 * float32(subtot)
 	} else if lama > 5 {
@@ -112,7 +114,7 @@ func cetakKelas(kode int) (namaKelas string) {
 	return
 }
 
-func nilaiHarga(kode int) (hargaKelas int) {
+func cetakHarga(kode int) (hargaKelas float32) {
 	if kode == 1 {
 		hargaKelas = 1000000
 	} else if kode == 2 {
@@ -135,22 +137,30 @@ func cetakKamar(kode string) (namaKamar string) {
 }
 
 func cetakTotal() {
-	garis3(120)
-	fmt.Println("No\tNama\tKelas\t\tKamar\t\tHarga\t\tLama\tSubtotal\tDiskon\t\tTotal Bayar")
-	garis3(120)
-	cetakPel2(pel1)
-	cetakPel2(pel2)
-	cetakPel2(pel3)
-	garis3(120)
+	cetakGaris(90)
+	fmt.Println("| No | Nama | Kelas   | Kamar     |    Harga | Lama | Subtotal | Diskon | Total Bayar |")
+	cetakGaris(90)
+	dataPel(pel1)
+	dataPel(pel2)
+	dataPel(pel3)
+	cetakGaris(90)
+	fmt.Println("Terima kasih sudah menginap di Hotel Vinducia")
+	cetakGaris(90)
+}
+
+func cetakJudul() {
+	cetakGaris(50)
+	fmt.Println("             Program Ujian Basic Go")
+	cetakGaris(50)
+	fmt.Println("                HOTEL VINDUCIA")
+	fmt.Println("          Jl. Daan Mogot Jakarta Barat")
+	cetakGaris(50)
+	fmt.Print("\n")
 }
 
 func main() {
-	tampil.Cetakjudul("Program Ujian Basic Go")
-	fmt.Println("\tHOTEL VINDUCIA")
-	fmt.Println("Jl. Daan Mogot Jakarta Barat")
-	fungsi.Garis()
-	fmt.Print("\n")
-	cetakHarga()
+	cetakJudul()
+	cetakKetentuan()
 	IsiData()
 	cetakPel(pel1)
 	cetakPel(pel2)
