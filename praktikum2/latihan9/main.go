@@ -62,6 +62,23 @@ func hapusBarang(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(barangs)
 }
 
+// Ubah barang
+func ubahBarang(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	for index, item := range barangs {
+		if item.ID == params["id"] {
+			barangs = append(barangs[:index], barangs[index+1:]...)
+			var barang Barang
+			_ = json.NewDecoder(r.Body).Decode(&barang)
+			barang.ID = params["id"]
+			barangs = append(barangs, barang)
+			json.NewEncoder(w).Encode(barang)
+			return
+		}
+	}
+}
+
 var barangs []Barang
 
 func main() {
@@ -72,6 +89,7 @@ func main() {
 	r.HandleFunc("/barang/{id}", ambilBarang).Methods("GET")
 	r.HandleFunc("/tambahbarang", tambahBarang).Methods("POST")
 	r.HandleFunc("/hapusbarang/{id}", hapusBarang).Methods("DELETE")
+	r.HandleFunc("/ubahbarang/{id}", ubahBarang).Methods("PUT")
 	var portNumber string = ":3000"
 	fmt.Println("Server Running di Port", portNumber)
 	log.Fatal(http.ListenAndServe(portNumber, r))
