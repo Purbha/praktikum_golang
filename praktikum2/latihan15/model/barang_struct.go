@@ -1,30 +1,50 @@
-package main
+package barang_struct
 
 import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
 	config_db "github.com/purbha/latihan/praktikum2/latihan14/config"
-	barang_struct "github.com/purbha/latihan/praktikum2/latihan14/model"
 )
 
-var db *sql.DB
-var err error
+type Barang struct {
+	IDBar      string
+	Bar_Nama   string
+	Bar_Harga  float64
+	Bar_Stok   int16
+	Bar_Create time.Time
+	Bar_Update time.Time
+}
 
-func ambilBarangs(w http.ResponseWriter, r *http.Request) {
-	var barangs []barang_struct.Barang
+func getpsqlInfo() string {
+	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		config_db.DBHost, config_db.DBPort, config_db.DBUser, config_db.DBPass, config_db.DBName)
+}
+
+func AmbilBarangs(w http.ResponseWriter, r *http.Request) {
+	db, err := sql.Open("postgres", getpsqlInfo())
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Koneksi Sukses")
+	var barangs []Barang
 	result, err := db.Query("SELECT * FROM barang")
 	if err != nil {
 		panic(err.Error())
 	}
 	defer result.Close()
 	for result.Next() {
-		var barang barang_struct.Barang
+		var barang Barang
 		err := result.Scan(&barang.IDBar, &barang.Bar_Nama, &barang.Bar_Harga, &barang.Bar_Stok,
 			&barang.Bar_Create, &barang.Bar_Update)
 		if err != nil {
@@ -36,12 +56,20 @@ func ambilBarangs(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(barangs)
 }
 
-func ambilBarang(w http.ResponseWriter, r *http.Request) {
+func AmbilBarang(w http.ResponseWriter, r *http.Request) {
+	db, err := sql.Open("postgres", getpsqlInfo())
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+	err = db.Ping()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Koneksi Sukses")
 	params := mux.Vars(r)
-	//id ini harus sama dengan id yang ada di r.HandleFunc("/barang/{id}"
 	idbar := params["id"]
-	var barang barang_struct.Barang
-	// buat sql query dengan parameter idbar
+	var barang Barang
 	sqlStatement := "SELECT * FROM barang WHERE idbar = " + idbar
 	result, err := db.Query(sqlStatement)
 	if err != nil {
@@ -57,25 +85,4 @@ func ambilBarang(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(barang)
-}
-
-func main() {
-	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		config_db.DBHost, config_db.DBPort, config_db.DBUser, config_db.DBPass, config_db.DBName)
-	db, err = sql.Open("postgres", psqlInfo)
-	if err != nil {
-		panic(err)
-	}
-	defer db.Close()
-	err = db.Ping()
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("Koneksi Sukses")
-	r := mux.NewRouter()
-	r.HandleFunc("/", ambilBarangs).Methods("GET")
-	r.HandleFunc("/barang/{id}", ambilBarang).Methods("GET")
-	var portNumber string = ":3000"
-	fmt.Println("Server Running di Port", portNumber)
-	log.Fatal(http.ListenAndServe(portNumber, r))
 }

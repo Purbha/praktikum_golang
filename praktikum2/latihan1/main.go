@@ -15,6 +15,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	//Router
 	http.HandleFunc("/", index)
 	fmt.Println("Server Running di Port 3000")
 	http.ListenAndServe(":3000", nil)

@@ -33,7 +33,7 @@ func ambilBarang(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	json.NewEncoder(w).Encode(&Barang{})
+	//json.NewEncoder(w).Encode(&Barang{})
 }
 
 var barangs []Barang

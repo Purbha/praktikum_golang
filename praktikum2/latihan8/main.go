@@ -11,6 +11,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+var barangs []Barang
+
 type Barang struct {
 	ID    string
 	Nama  string
@@ -35,7 +37,7 @@ func ambilBarang(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	json.NewEncoder(w).Encode(&Barang{})
+	//json.NewEncoder(w).Encode(&Barang{})
 }
 
 // Tambah 1 barang
@@ -61,8 +63,6 @@ func hapusBarang(w http.ResponseWriter, r *http.Request) {
 	}
 	json.NewEncoder(w).Encode(barangs)
 }
-
-var barangs []Barang
 
 func main() {
 	barangs = append(barangs, Barang{ID: "1", Nama: "Flashdisk", Harga: 75000})
