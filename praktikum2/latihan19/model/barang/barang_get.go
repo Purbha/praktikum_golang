@@ -1,25 +1,15 @@
-package barang_struct
+package model_barang
 
 import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/gorilla/mux"
-	_ "github.com/lib/pq"
-	config_db "github.com/purbha/latihan/praktikum2/latihan15/config"
+	config_db "github.com/purbha/latihan/praktikum2/latihan19/config"
+	encrypt_teks "github.com/purbha/latihan/praktikum2/latihan19/encrypt"
 )
-
-type Barang struct {
-	IDBar      string
-	Bar_Nama   string
-	Bar_Harga  float64
-	Bar_Stok   int16
-	Bar_Create time.Time
-	Bar_Update time.Time
-}
 
 func getpsqlInfo() string {
 	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
@@ -38,6 +28,8 @@ func AmbilBarangs(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println("Koneksi Sukses")
 	var barangs []Barang
+	//var brgdata BrgData
+	var brgenc BrgEnc
 	result, err := db.Query("SELECT * FROM barang")
 	if err != nil {
 		panic(err.Error())
@@ -52,8 +44,18 @@ func AmbilBarangs(w http.ResponseWriter, r *http.Request) {
 		}
 		barangs = append(barangs, barang)
 	}
+	e, err := json.Marshal(barangs)
+	if err != nil {
+		panic(err.Error())
+	}
+	encText, err := encrypt_teks.Encrypt(string(e), config_db.MySecret)
+	if err != nil {
+		panic(err.Error())
+	}
+	brgenc.Status = "OK"
+	brgenc.Data = encText
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(barangs)
+	json.NewEncoder(w).Encode(brgenc)
 }
 
 func AmbilBarang(w http.ResponseWriter, r *http.Request) {
