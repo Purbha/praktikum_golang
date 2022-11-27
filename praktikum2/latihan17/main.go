@@ -1,64 +1,24 @@
 package main
 
 import (
-	"crypto/aes"
-	"crypto/cipher"
-	"encoding/base64"
 	"fmt"
+	"log"
+	"net/http"
+
+	"github.com/gorilla/mux"
+	model_barang "github.com/purbha/latihan/praktikum2/latihan17/model/barang"
 )
 
-var bytes = []byte{35, 46, 57, 24, 85, 35, 24, 74, 87, 35, 88, 98, 66, 32, 14, 05}
-
-const MySecret string = "abc&1*~#^2^#s0^=)^^7%b35"
-
-func Encode(b []byte) string {
-	return base64.StdEncoding.EncodeToString(b)
-}
-
-func Encrypt(text, MySecret string) (string, error) {
-	block, err := aes.NewCipher([]byte(MySecret))
-	if err != nil {
-		return "", err
-	}
-	plainText := []byte(text)
-	cfb := cipher.NewCFBEncrypter(block, bytes)
-	cipherText := make([]byte, len(plainText))
-	cfb.XORKeyStream(cipherText, plainText)
-	return Encode(cipherText), nil
-}
-
-func Decode(s string) []byte {
-	data, err := base64.StdEncoding.DecodeString(s)
-	if err != nil {
-		panic(err)
-	}
-	return data
-}
-
-func Decrypt(text, MySecret string) (string, error) {
-	block, err := aes.NewCipher([]byte(MySecret))
-	fmt.Println(block)
-	if err != nil {
-		return "", err
-	}
-	cipherText := Decode(text)
-	cfb := cipher.NewCFBDecrypter(block, bytes)
-	plainText := make([]byte, len(cipherText))
-	cfb.XORKeyStream(plainText, cipherText)
-	return string(plainText), nil
-}
 func main() {
-	StringToEncrypt := "Encrypting this string"
-	encText, err := Encrypt(StringToEncrypt, MySecret)
-	if err != nil {
-		fmt.Println("error encrypting your classified text: ", err)
-	}
-	fmt.Println(encText)
-	/*
-		decText, err := Decrypt("Li5E8RFcV/EPZY/neyCXQYjrfa/atA==", MySecret)
-		if err != nil {
-			fmt.Println("error decrypting your encrypted text: ", err)
-		}
-		fmt.Println(decText)
-	*/
+	r := mux.NewRouter()
+	r.HandleFunc("/", model_barang.AmbilBarangs).Methods("GET")
+	r.HandleFunc("/barang/{id}", model_barang.AmbilBarang).Methods("GET")
+	r.HandleFunc("/tambahbarang", model_barang.TambahBarang).Methods("POST")
+
+	//r.HandleFunc("/hapusbarang/{id}", hapusBarang).Methods("DELETE")
+	//r.HandleFunc("/ubahbarang/{id}", ubahBarang).Methods("PUT")
+
+	var portNumber string = ":3000"
+	fmt.Println("Server Running di Port", portNumber)
+	log.Fatal(http.ListenAndServe(portNumber, r))
 }
