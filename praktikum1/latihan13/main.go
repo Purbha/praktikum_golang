@@ -27,6 +27,11 @@ func main() {
 	dataCut := dataAngka[2 : len(dataAngka)-10]
 	fmt.Printf("Isi dataCut \t: %v\n", dataCut)
 
+	//Cek panjang dan kapasitas dataCut
+	fmt.Printf("Panjang dataCut \t: %d\n", len(dataCut))
+	fmt.Printf("Kapasitas dataCut \t: %d\n", cap(dataCut))
+	fungsi.Garis()
+
 	//Buat slice dengan panjang berupa panjang dari dataCut
 	dataCopy := make([]int, len(dataCut))
 
