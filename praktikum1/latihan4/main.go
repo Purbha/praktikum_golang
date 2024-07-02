@@ -3,8 +3,7 @@ package main
 import (
 	"fmt"
 
-	//Pemanggilan Custom Packages
-	"github.com/purbha/latihan/praktikum1/latihan4/aritmatik"
+	"latihan-module/praktikum1/latihan4/aritmatik"
 )
 
 func main() {

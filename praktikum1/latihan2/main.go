@@ -14,7 +14,7 @@ func main() {
 
 	fmt.Println("Nama saya adalah:", nama)
 	fmt.Println("Umur saya adalah:", umur)
-	//"\t artinya mencetak karakter TAB"
+	// \t artinya mencetak karakter TAB
 	fmt.Println("Ukuran sepatu saya adalah \t\t\t:", ukuranSepatu)
 	fmt.Println("Jenis kelamin saya adalah (true = pria)) \t:", isPria)
 

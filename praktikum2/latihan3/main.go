@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"latihan3-module/html"
 	"net/http"
 )
 
@@ -12,10 +13,12 @@ If you do not pass arguments, that hints you're likely not having / using a form
 so you shouldn't use fmt.Fprintf() in the first place.
 */
 func index(w http.ResponseWriter, r *http.Request) {
-	var htmlData string = "<h1>Halo Apa Kabar Dunia</h1>"
-	htmlData += "<p>Nama saya Irsyad dan tempat tinggal saya di Jatiasih.</p>"
-	htmlData += "<p>Silakan main ke rumah jika ada waktu.</p>"
-	fmt.Fprint(w, htmlData)
+	/*
+		var htmlData string = "<h1>Halo Apa Kabar Dunia</h1>"
+		htmlData += "<p>Nama saya Irsyad dan tempat tinggal saya di Jatiasih.</p>"
+		htmlData += "<p>Silakan main ke rumah jika ada waktu.</p>"
+	*/
+	fmt.Fprint(w, html.Html_data())
 }
 
 func main() {

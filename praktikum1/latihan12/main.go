@@ -22,8 +22,14 @@ func main() {
 	fungsi.Garis()
 
 	//Merubah panjang dari slice
-	arrayAngka := [6]int{9, 10, 11, 12, 13, 14} //Sebuah array angka
-	dataAngka1 := arrayAngka[1:3]               //Membuat slice dari array
+	arrayAngka := [8]int{9, 10, 11, 12, 13, 14, 15, 16} //Sebuah array angka
+	/*
+		Dapet Dari Tomas:
+		Kapasitas itu didapat dari jumlah maksimal elemen yang ditampung oleh array
+		  dikurang dengan elemen pertama dari slice Ex: 8-5 = 3
+		Isi itu didapat dari posisi akhir dari slice di kurang posisi awal E: 6-5 = 1
+	*/
+	dataAngka1 := arrayAngka[5:6] //Membuat slice dari array
 	fmt.Printf("Isi dataAngka1 adalah %v\n", dataAngka1)
 	fmt.Printf("Panjang dataAngka1 adalah %d\n", len(dataAngka1))
 	fmt.Printf("Kapasitas dataAngka1 adalah %d\n", cap(dataAngka1))
@@ -35,8 +41,10 @@ func main() {
 	fmt.Printf("Kapasitas dataAngka1 adalah %d\n", cap(dataAngka1)) //Kapasitas slice tidak berubah
 	fungsi.Garis()
 
+	//Kapasitas slice bertambah kelipatan 5 jika di bawah 10.
+	//Jika diatas 10 kapasitasnya akan bertambah 2
 	dataAngka1 = append(dataAngka1, 20, 21, 22) //Merubah panjang slice dengan cara menambahkan item
 	fmt.Printf("Isi dataAngka1 adalah %v\n", dataAngka1)
-	fmt.Printf("Panjang dataAngka1 adalah %d\n", len(dataAngka1))   //Panjang slice bertambah
-	fmt.Printf("Kapasitas dataAngka1 adalah %d\n", cap(dataAngka1)) //Kapasitas slice bertambah
+	fmt.Printf("Panjang dataAngka1 adalah %d\n", len(dataAngka1)) //Panjang slice bertambah
+	fmt.Printf("Kapasitas dataAngka1 adalah %d\n", cap(dataAngka1))
 }
