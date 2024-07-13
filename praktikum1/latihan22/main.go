@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/purbha/latihan/praktikum1/latihan22/tampil"
+	"latihan-module/praktikum1/latihan22/tampil"
 )
 
 type Orang struct {

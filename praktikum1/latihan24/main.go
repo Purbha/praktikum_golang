@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/purbha/latihan/praktikum1/latihan10/fungsi"
-	"github.com/purbha/latihan/praktikum1/latihan22/tampil"
+	"latihan-module/praktikum1/latihan10/fungsi"
+	"latihan-module/praktikum1/latihan22/tampil"
 )
 
 func main() {
