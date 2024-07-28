@@ -23,13 +23,7 @@ func main() {
 
 	//Merubah panjang dari slice
 	arrayAngka := [8]int{9, 10, 11, 12, 13, 14, 15, 16} //Sebuah array angka
-	/*
-		Dapet Dari Tomas:
-		Kapasitas itu didapat dari jumlah maksimal elemen yang ditampung oleh array
-		  dikurang dengan elemen pertama dari slice Ex: 8-5 = 3
-		Isi itu didapat dari posisi akhir dari slice di kurang posisi awal E: 6-5 = 1
-	*/
-	dataAngka1 := arrayAngka[5:6] //Membuat slice dari array
+	dataAngka1 := arrayAngka[5:6]                       //Membuat slice dari array
 	fmt.Printf("Isi dataAngka1 adalah %v\n", dataAngka1)
 	fmt.Printf("Panjang dataAngka1 adalah %d\n", len(dataAngka1))
 	fmt.Printf("Kapasitas dataAngka1 adalah %d\n", cap(dataAngka1))

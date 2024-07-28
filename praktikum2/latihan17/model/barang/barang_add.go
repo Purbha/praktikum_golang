@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	config "github.com/purbha/latihan/praktikum2/latihan17/config"
+	config "latihan-module/praktikum2/latihan17/config"
 )
 
 func TambahBarang(w http.ResponseWriter, r *http.Request) {

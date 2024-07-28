@@ -7,10 +7,11 @@ import (
 	"log"
 	"net/http"
 
+	config_db "latihan-module/praktikum2/latihan13/config"
+	barang_struct "latihan-module/praktikum2/latihan13/model"
+
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
-	config_db "github.com/purbha/latihan/praktikum2/latihan13/config"
-	barang_struct "github.com/purbha/latihan/praktikum2/latihan13/model"
 )
 
 /*

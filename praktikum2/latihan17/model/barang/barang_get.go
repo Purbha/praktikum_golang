@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
+	config "latihan-module/praktikum2/latihan17/config"
+
 	"github.com/gorilla/mux"
-	config "github.com/purbha/latihan/praktikum2/latihan17/config"
 )
 
 func AmbilBarangs(w http.ResponseWriter, r *http.Request) {

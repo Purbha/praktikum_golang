@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	config_db "github.com/purbha/latihan/praktikum2/latihan19/config"
-	decrypt_teks "github.com/purbha/latihan/praktikum2/latihan19/encrypt"
+	config_db "latihan-module/praktikum2/latihan19/config"
+
+	decrypt_teks "latihan-module/praktikum2/latihan19/encrypt"
 )
 
 func Cekbarang(w http.ResponseWriter, r *http.Request) {

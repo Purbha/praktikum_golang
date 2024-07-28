@@ -5,7 +5,7 @@ import (
 	"crypto/cipher"
 	"encoding/base64"
 
-	config_db "github.com/purbha/latihan/praktikum2/latihan19/config"
+	config_db "latihan-module/praktikum2/latihan19/config"
 )
 
 func Encode(b []byte) string {

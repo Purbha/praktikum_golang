@@ -5,8 +5,9 @@ import (
 	"log"
 	"net/http"
 
+	model_barang "latihan-module/praktikum2/latihan16/model/barang"
+
 	"github.com/gorilla/mux"
-	model_barang "github.com/purbha/latihan/praktikum2/latihan16/model/barang"
 )
 
 func main() {

@@ -6,9 +6,10 @@ import (
 	"fmt"
 	"net/http"
 
+	config_db "latihan-module/praktikum2/latihan19/config"
+	encrypt_teks "latihan-module/praktikum2/latihan19/encrypt"
+
 	"github.com/gorilla/mux"
-	config_db "github.com/purbha/latihan/praktikum2/latihan19/config"
-	encrypt_teks "github.com/purbha/latihan/praktikum2/latihan19/encrypt"
 )
 
 func getpsqlInfo() string {

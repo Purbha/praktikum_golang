@@ -7,9 +7,10 @@ import (
 	"net/http"
 	"time"
 
+	config_db "latihan-module/praktikum2/latihan15/config"
+
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
-	config_db "github.com/purbha/latihan/praktikum2/latihan15/config"
 )
 
 type Barang struct {
