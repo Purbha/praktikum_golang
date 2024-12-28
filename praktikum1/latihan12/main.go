@@ -31,12 +31,11 @@ func main() {
 
 	dataAngka1 = arrayAngka[1:6] //Merubah panjang slice dengan cara di slice ulang
 	fmt.Printf("Isi dataAngka1 adalah %v\n", dataAngka1)
-	fmt.Printf("Panjang dataAngka1 adalah %d\n", len(dataAngka1))   //Panjang slice berkurang
-	fmt.Printf("Kapasitas dataAngka1 adalah %d\n", cap(dataAngka1)) //Kapasitas slice tidak berubah
+	fmt.Printf("Panjang dataAngka1 adalah %d\n", len(dataAngka1))
+	fmt.Printf("Kapasitas dataAngka1 adalah %d\n", cap(dataAngka1))
 	fungsi.Garis()
 
-	//Kapasitas slice bertambah kelipatan 5 jika di bawah 10.
-	//Jika diatas 10 kapasitasnya akan bertambah 2
+	//https://stackoverflow.com/questions/75348572/go-slices-capacity-increase-rate
 	dataAngka1 = append(dataAngka1, 20, 21, 22) //Merubah panjang slice dengan cara menambahkan item
 	fmt.Printf("Isi dataAngka1 adalah %v\n", dataAngka1)
 	fmt.Printf("Panjang dataAngka1 adalah %d\n", len(dataAngka1)) //Panjang slice bertambah
